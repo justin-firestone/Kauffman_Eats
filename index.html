@@ -1,0 +1,79 @@
+<!doctype html>
+<html>
+
+<head>
+	<title>Kauffman Eats</title>
+	<script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
+	<script type="text/javascript" src="js/vis.js"></script>
+	<script type="text/javascript" src="js/data.js"></script>
+	<script type="text/javascript" src="js/seedrandom.min.js"></script>
+	<script type="text/javascript" src="js/visual.js"></script>
+	<script type="text/javascript" src="js/graph.js"></script>
+	<script type="text/javascript" src="js/pathfinding.js"></script>
+	<script type="text/javascript" src="js/init.js"></script>
+	<script type="text/javascript" src="js/load.js"></script>
+	<link href="css/vis-network.min.css" rel="stylesheet" type="text/css" />
+	<style type="text/css">
+		body {
+			font-family: sans-serif;
+			color: #555555;
+		}
+
+		#mynetwork {
+			width: 75%;
+			height: 750px;
+			border: 1px solid lightgray;
+			float: left;
+		}
+
+		#sidebar {
+			width: 23%;
+			float: right;
+		}
+
+		#deliverator_panels div {
+			background-color: #efefef;
+			margin-bottom: 5px;
+		}
+
+		.deliverator_master_panel {
+			padding: 7px;
+		}
+
+		.deliverator_info {
+			margin-left: 15px;
+			font-size: 1em;
+		}
+
+		.deliverator_title {
+			font-size: 1.3em;
+			font-weight: bold;
+			display: block;
+		}
+	</style>
+</head>
+
+<body>
+	<h1>Kauffman Campus Cuisine Deliverators</h1>
+	<p> Simulate the Kauffman Campus Cuisine Deliverators, to see if this is an idea worth pursuing...</p>
+	<div id="container">
+		<div id="mynetwork"></div>
+		<div id="sidebar">
+			<h2>Deliverators</h2>
+			<div id="deliverator_panels"></div>
+		</div>
+	</div>
+	<script type="text/javascript">
+		$(document).ready(function() {
+			setRandomSeed();
+			// buildMapOld();
+			loadMap();
+			initNetwork();
+			addDeliverators(3);
+			createDeliveratorInfoPanels();
+			startAnimationTimer();
+		})
+	</script>
+</body>
+
+</html>
