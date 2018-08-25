@@ -100,8 +100,8 @@ function getNetworkOptions() {
  *    simulator.
  * @method setRandomSeed
  */
-function setRandomSeed() {
-    Math.seedrandom('Raikes');
+function setRandomSeed(seed) {
+    Math.seedrandom(seed);
 }
 
 
