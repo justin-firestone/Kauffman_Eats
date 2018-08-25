@@ -4,7 +4,7 @@ const setup = () => {
 }
 QUnit.module("initTests", {beforeEach: setup});
 
-QUnit.test( "initNetwork Test 1: Network Creation", function( assert ) {
+QUnit.test("initNetwork: Network Creation", function( assert ) {
     //arrange
     let expectedContainer = document.getElementById('mynetwork');
     let expectedNodeIds = Object.keys(displayNodes._data);
@@ -21,4 +21,27 @@ QUnit.test( "initNetwork Test 1: Network Creation", function( assert ) {
     assert.equal( network.body.container,  expectedContainer);
     assert.ok( expectedNodeIds.every(n => networkNodeIds.has(n)) );
     assert.ok( expectedEdgeIds.every(e => networkEdgeIds.has(e)) );
+});
+
+QUnit.test("addDeliverators: Add 10 Deliverators", function(assert){
+    //arrange
+    let numDeliverators = 10;
+
+    //act
+    addDeliverators(numDeliverators);
+
+    //assert
+    assert.equal(deliverators.length, numDeliverators);
+});
+
+QUnit.test("addDeliverators: Add Negative Deliverators", function(assert){
+    //arrange
+    let numDeliverators = -10;
+    let expectedNum = 0;
+
+    //act
+    addDeliverators(numDeliverators);
+
+    //assert
+    assert.equal(deliverators.length, expectedNum);
 });
