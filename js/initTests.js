@@ -110,3 +110,32 @@ QUnit.test("getNewEndLocation: Deliverator with already-set start location", fun
     //assert
     assert.ok(newStart.id !== expectedEndId);
 });
+
+QUnit.test("resetDeliverator: reset deliverator with existing start and end locations", function(assert){
+    //arrange
+    let startNodeId = 4719907357, endNodeId = 844923267;
+    let startX = 476.30366971418425, startY = -348.97568806968593;
+    let deliverator = {
+        id: 'test_deliverator',
+        label: 'T_D',
+        color: {
+            background: getRandomColor(),
+        },
+        group: 'deliverator',
+        start: startNodeId,
+        restaurant: false,
+        end: endNodeId
+    };
+
+    //act
+    resetDeliverator(deliverator);
+
+    //assert
+    assert.equal(deliverator.start, endNodeId);
+    assert.ok(deliverator.restaurant);
+    assert.equal(deliverator.x, startX);
+    assert.equal(deliverator.y, startY);
+    assert.ok(deliverator.end !== deliverator.start);
+    assert.equal(deliverator.path.length, 0);
+    assert.equal(deliverator.steps.length, 0);
+});
