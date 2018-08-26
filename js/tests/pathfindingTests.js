@@ -130,6 +130,7 @@ QUnit.test("Test getNeighborsForNode returns distinct neighbors when two edges b
 					
 	let result = getNeighborsForNode(2);
 	
+	// There should be no duplicate neighbors so because  node 2 only has one neighbor, only one neighbor should be returned
 	assert.deepEqual(result.length, 1); 
 });
 
@@ -143,6 +144,7 @@ QUnit.test("Test findPathThroughRestaurant starts at source", function( assert )
 					
 	let result = findPathThroughRestaurant(1, 2, 3);
 	
+	// The path starts at the source if the id of the first step is the id of the source
 	assert.deepEqual(result[0].id, 1); 
 });
 
@@ -156,7 +158,8 @@ QUnit.test("Test findPathThroughRestaurant ends at destination", function( asser
 					
 	let result = findPathThroughRestaurant(1, 2, 3);
 	
-	assert.deepEqual(result[2].id, 3); 
+	// The path ends at the destination if the id of the last step is the id of the destination
+	assert.deepEqual(result[result.length - 1].id, 3); 
 });
 
 QUnit.test("Test findPathThroughRestaurant contains restaurant exactly once", function( assert ) {
@@ -310,4 +313,26 @@ QUnit.test("Test dfs returns correct path, multiple possible paths", function( a
 	let result = dfs(graphNodes[1], graphNodes[6]);
 	
 	assert.deepEqual(result.map(node => node.id), [1, 2, 4, 5, 6]); 
+});
+
+QUnit.test("Test dfs returns correct path, source and destination are the same node", function( assert ) {
+	graphNodes = {  "1": {"id": 1, "label": "N1", "x": 0, "y": 0, "group": "primary", "visited": false },
+					"2": {"id": 2, "label": "N2", "x": 0, "y": 2, "group": "primary", "visited": false },
+					"3": {"id": 3, "label": "N3", "x": 5, "y": 2, "group": "primary", "visited": false },
+					"4": {"id": 4, "label": "N4", "x": 0, "y": 4, "group": "primary", "visited": false },
+					"5": {"id": 5, "label": "N5", "x": 0, "y": 8, "group": "primary", "visited": false },
+					"6": {"id": 6, "label": "N6", "x": -3, "y": 4, "group": "primary", "visited": false },
+					"7": {"id": 7, "label": "N7", "x": 5, "y": 4, "group": "primary", "visited": false }};
+	
+	graphEdges = { "1_2": { "id": "1_2", "from": 1, "to": 2, "length": 2, "waypointEdges": ["1_2"], "graphEdge": "1_2"},
+					"2_3": { "id": "2_3", "from": 2, "to": 3, "length": 5, "waypointEdges": ["2_3"], "graphEdge": "2_3"},
+					"2_4": { "id": "2_4", "from": 2, "to": 4, "length": 2, "waypointEdges": ["2_4"], "graphEdge": "2_4"},
+					"4_5": { "id": "4_5", "from": 4, "to": 5, "length": 4, "waypointEdges": ["4_5"], "graphEdge": "4_5"},
+					"4_6": { "id": "4_6", "from": 4, "to": 6, "length": 3, "waypointEdges": ["4_6"], "graphEdge": "4_6"},
+					"5_6": { "id": "5_6", "from": 5, "to": 6, "length": 5, "waypointEdges": ["5_6"], "graphEdge": "5_6"},
+					"3_7": { "id": "3_7", "from": 3, "to": 7, "length": 2, "waypointEdges": ["3_7"], "graphEdge": "3_7"}};
+					
+	let result = dfs(graphNodes[1], graphNodes[1]);
+	
+	assert.deepEqual(result.map(node => node.id), [1]); 
 });
