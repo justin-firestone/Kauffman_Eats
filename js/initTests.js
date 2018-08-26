@@ -1,8 +1,8 @@
-const setup = () => {
+const initTestSetup = () => {
     setRandomSeed('Raikes');
     loadMap();
 }
-QUnit.module("initTests", {beforeEach: setup});
+QUnit.module("initTests", {beforeEach: initTestSetup});
 
 QUnit.test("initNetwork: Network Creation", function( assert ) {
     //arrange
