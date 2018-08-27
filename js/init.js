@@ -251,29 +251,29 @@ function startAnimationTimer() {
     // var myVar = setTimeout(myTimer, 100);
     var myVar = setInterval(animationTimer, 10);
     var count = 0;
+}
 
-    // the function to be called on each tick of the timer
-    function animationTimer() {
-        for (let t = 0; t < deliverators.length; t++) {
-            // if the deliverator has completed all of its steps, find a new location
-            if (deliverators[t].steps.length == 0) {
-                // find new destination for the deliverator
-                resetDeliverator(deliverators[t]);
+// the function to be called on each tick of the timer
+function animationTimer() {
+    for (let t = 0; t < deliverators.length; t++) {
+        // if the deliverator has completed all of its steps, find a new location
+        if (deliverators[t].steps.length == 0) {
+            // find new destination for the deliverator
+            resetDeliverator(deliverators[t]);
 
-                // find a path for the deliverator
-                deliverators[t].path = findPathThroughRestaurant(deliverators[t].start, deliverators[t].restaurant, deliverators[t].end)
+            // find a path for the deliverator
+            deliverators[t].path = findPathThroughRestaurant(deliverators[t].start, deliverators[t].restaurant, deliverators[t].end)
 
-                // highlight the path
-                highlightAllPaths();
+            // highlight the path
+            highlightAllPaths();
 
-                // find incremental steps for the path
-                deliverators[t].steps = getStepsAlongPath(deliverators[t].path);
+            // find incremental steps for the path
+            deliverators[t].steps = getStepsAlongPath(deliverators[t].path);
 
-                updateDeliveratorInfoPanels();
-            }
-            // pop a step off the stack, and travel that step
-            let step = deliverators[t].steps.shift();
-            network.moveNode(deliverators[t].id, step.x, step.y);
+            updateDeliveratorInfoPanels();
         }
+        // pop a step off the stack, and travel that step
+        let step = deliverators[t].steps.shift();
+        network.moveNode(deliverators[t].id, step.x, step.y);
     }
 }
