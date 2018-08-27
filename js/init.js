@@ -78,7 +78,7 @@ function getNetworkOptions() {
             waypoint: {
                 shape: 'image',
                 image: 'images/transparent.png',
-                color: 'purple',
+                // color: 'purple',
                 size: 25,
                 borderWidth: 0,
             },
