@@ -289,219 +289,224 @@ QUnit.test("getRandomRestaurantNode: first restaurant node with 'Raikes' seed", 
     assert.deepEqual(randomRestaurantNode.id, expectedRestaurantNodeId);
 });
 
-// 
-
-QUnit.test("animationTimer: one deliverator following the path 1-2-3-2-4-5", function(assert){
-    //arrange
-    graphNodes = {  
-        "1": {  
-            "id":1,
-            "label":"J1",
-            "x": 0,
-            "y": 0,
-            "group":"primary"
-        },
-        "2": {  
-            "id":2,
-            "label":"J2",
-            "x": 1,
-            "y": 0,
-            "group":"primary"
-        },
-        "3": {  
-            "id": 3,
-            "label": "J3",
-            "x": 2,
-            "y": 0,
-            "group": "primary"
-        },
-        "4": {  
-            "id": 4,
-            "label": "J4",
-            "x": 2,
-            "y": 1,
-            "group": "primary"
-        },
-        "5": {  
-            "id": 5,
-            "label": "J5",
-            "x": 3,
-            "y": 1,
-            "group": "primary"
-        },
-        "10": {  
-            "id": 10,
-            "label": "J10",
-            "x": 10,
-            "y": 1,
-            "group": "primary"
-        },
-        "11": {  
-            "id": 11,
-            "label": "J11",
-            "x": 20,
-            "y": 1,
-            "group": "primary"
-        },
-    };
-    graphEdges = { 
-        "1_2": {  
-        "id": "1_2",
-        "from": 1,
-        "to": 2,
-        "length": 1,
-        "waypointEdges":[  
-            "1_2"
-        ],
-        "graphEdge":"1_2"
-        },
-        "2_3": {  
-            "id": "2_3",
-            "from": 2,
-            "to": 3,
-            "length": 1,
-            "waypointEdges":[  
-            "2_3"
-            ],
-            "graphEdge":"2_3"
-        },
-        "2_4": {  
-            "id": "2_4",
-            "from": 2,
-            "to": 4,
-            "length": 1,
-            "waypointEdges":[  
-            "2_4"
-            ],
-            "graphEdge":"2_4"
-        },
-        "4_5": {  
-            "id": "4_5",
-            "from": 4,
-            "to": 5,
-            "length": 1,
-            "waypointEdges":[  
-            "4_5"
-            ],
-            "graphEdge":"4_5"
-        },
-        "10_11": {  
-            "id": "10_11",
-            "from": 10,
-            "to": 11,
-            "length": 1,
-            "waypointEdges":[  
-            "10_11"
-            ],
-            "graphEdge":"10_11"
-        }
-    };
-    displayNodes = getDataSetForItems([
-        {  
-            "id": 1,
-            "label": "J1",
-            "x": 0,
-            "y": 0,
-            "group": "primary"
-        },
-        {  
-            "id": 2,
-            "label": "J2",
-            "x": 1,
-            "y": 0,
-            "group": "primary"
-        },
-        {  
-            "id": 3,
-            "label": "J3",
-            "x": 2,
-            "y": 0,
-            "group": "primary"
-        },
-        {  
-            "id": 4,
-            "label": "J4",
-            "x": 2,
-            "y": 1,
-            "group": "primary"
-        },
-        {  
-            "id": 5,
-            "label": "J5",
-            "x": 3,
-            "y": 1,
-            "group": "primary"
-        },
-        {  
-            "id": 10,
-            "label": "J10",
-            "x": 10,
-            "y": 1,
-            "group": "primary"
-        },
-        {  
-            "id": 11,
-            "label": "J11",
-            "x": 20,
-            "y": 1,
-            "group": "primary"
-        }
-    ]);
-    displayEdges = getDataSetForItems([
-        {  
+// define QUnit module here
+QUnit.module("animationTimer", {
+    beforeEach: function(){
+        setRandomSeed('Raikes');
+        graphNodes = {  
+            "1": {  
+                "id":1,
+                "label":"J1",
+                "x": 0,
+                "y": 0,
+                "group":"primary"
+            },
+            "2": {  
+                "id":2,
+                "label":"J2",
+                "x": 1,
+                "y": 0,
+                "group":"primary"
+            },
+            "3": {  
+                "id": 3,
+                "label": "J3",
+                "x": 2,
+                "y": 0,
+                "group": "primary"
+            },
+            "4": {  
+                "id": 4,
+                "label": "J4",
+                "x": 2,
+                "y": 1,
+                "group": "primary"
+            },
+            "5": {  
+                "id": 5,
+                "label": "J5",
+                "x": 3,
+                "y": 1,
+                "group": "primary"
+            },
+            "10": {  
+                "id": 10,
+                "label": "J10",
+                "x": 10,
+                "y": 1,
+                "group": "primary"
+            },
+            "11": {  
+                "id": 11,
+                "label": "J11",
+                "x": 20,
+                "y": 1,
+                "group": "primary"
+            },
+        };
+        graphEdges = { 
+            "1_2": {  
             "id": "1_2",
             "from": 1,
             "to": 2,
             "length": 1,
             "waypointEdges":[  
-            "1_2"
+                "1_2"
             ],
             "graphEdge":"1_2"
-        },
-        {  
-            "id": "2_3",
-            "from": 2,
-            "to": 3,
-            "length": 1,
-            "waypointEdges":[  
-            "2_3"
-            ],
-            "graphEdge":"2_3"
-        },
-        {  
-            "id": "2_4",
-            "from": 2,
-            "to": 4,
-            "length": 1,
-            "waypointEdges":[  
-            "2_4"
-            ],
-            "graphEdge":"2_4"
-        },
-        {  
-            "id": "4_5",
-            "from": 4,
-            "to": 5,
-            "length": 1,
-            "waypointEdges":[  
-            "4_5"
-            ],
-            "graphEdge":"4_5"
-        },
-        {  
-            "id": "10_11",
-            "from": 10,
-            "to": 11,
-            "length": 1,
-            "waypointEdges":[  
-            "10_11"
-            ],
-            "graphEdge":"10_11"
-        }
-    ]);
-    RESTAURANTS = "[3]";
-    initNetwork();
-    addDeliverators(1); 
+            },
+            "2_3": {  
+                "id": "2_3",
+                "from": 2,
+                "to": 3,
+                "length": 1,
+                "waypointEdges":[  
+                "2_3"
+                ],
+                "graphEdge":"2_3"
+            },
+            "2_4": {  
+                "id": "2_4",
+                "from": 2,
+                "to": 4,
+                "length": 1,
+                "waypointEdges":[  
+                "2_4"
+                ],
+                "graphEdge":"2_4"
+            },
+            "4_5": {  
+                "id": "4_5",
+                "from": 4,
+                "to": 5,
+                "length": 1,
+                "waypointEdges":[  
+                "4_5"
+                ],
+                "graphEdge":"4_5"
+            },
+            "10_11": {  
+                "id": "10_11",
+                "from": 10,
+                "to": 11,
+                "length": 1,
+                "waypointEdges":[  
+                "10_11"
+                ],
+                "graphEdge":"10_11"
+            }
+        };
+        displayNodes = getDataSetForItems([
+            {  
+                "id": 1,
+                "label": "J1",
+                "x": 0,
+                "y": 0,
+                "group": "primary"
+            },
+            {  
+                "id": 2,
+                "label": "J2",
+                "x": 1,
+                "y": 0,
+                "group": "primary"
+            },
+            {  
+                "id": 3,
+                "label": "J3",
+                "x": 2,
+                "y": 0,
+                "group": "primary"
+            },
+            {  
+                "id": 4,
+                "label": "J4",
+                "x": 2,
+                "y": 1,
+                "group": "primary"
+            },
+            {  
+                "id": 5,
+                "label": "J5",
+                "x": 3,
+                "y": 1,
+                "group": "primary"
+            },
+            {  
+                "id": 10,
+                "label": "J10",
+                "x": 10,
+                "y": 1,
+                "group": "primary"
+            },
+            {  
+                "id": 11,
+                "label": "J11",
+                "x": 20,
+                "y": 1,
+                "group": "primary"
+            }
+        ]);
+        displayEdges = getDataSetForItems([
+            {  
+                "id": "1_2",
+                "from": 1,
+                "to": 2,
+                "length": 1,
+                "waypointEdges":[  
+                "1_2"
+                ],
+                "graphEdge":"1_2"
+            },
+            {  
+                "id": "2_3",
+                "from": 2,
+                "to": 3,
+                "length": 1,
+                "waypointEdges":[  
+                "2_3"
+                ],
+                "graphEdge":"2_3"
+            },
+            {  
+                "id": "2_4",
+                "from": 2,
+                "to": 4,
+                "length": 1,
+                "waypointEdges":[  
+                "2_4"
+                ],
+                "graphEdge":"2_4"
+            },
+            {  
+                "id": "4_5",
+                "from": 4,
+                "to": 5,
+                "length": 1,
+                "waypointEdges":[  
+                "4_5"
+                ],
+                "graphEdge":"4_5"
+            },
+            {  
+                "id": "10_11",
+                "from": 10,
+                "to": 11,
+                "length": 1,
+                "waypointEdges":[  
+                "10_11"
+                ],
+                "graphEdge":"10_11"
+            }
+        ]);
+        RESTAURANTS = "[3]";
+        initNetwork();
+    }
+});
+
+QUnit.test("animationTimer: one deliverator following the path 1-2-3-2-4-5", function(assert){
+    //arrange
+    addDeliverators(1);
     const deliverator = deliverators[0];
     const expectedPath = [graphNodes[1], graphNodes[2], graphNodes[3], graphNodes[2], graphNodes[4], graphNodes[5]];
     const expectedSteps = [
@@ -513,7 +518,6 @@ QUnit.test("animationTimer: one deliverator following the path 1-2-3-2-4-5", fun
     ];
 
     //act/assert
-
     //run animationTimer once to generate the path/steps for the new deliverator
     assert.deepEqual(deliverator.path.length, 0);
     animationTimer();
