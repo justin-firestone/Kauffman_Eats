@@ -100,8 +100,8 @@ function getNetworkOptions() {
  *    simulator.
  * @method setRandomSeed
  */
-function setRandomSeed() {
-    Math.seedrandom('Raikes');
+function setRandomSeed(seed) {
+    Math.seedrandom(seed);
 }
 
 
@@ -159,9 +159,9 @@ function getNewStartLocation(node) {
 
 
 /**
- * Gets a start location for a deliverator. It will be a new random location that
+ * Gets a end location for a deliverator. It will be a new random location that
  *   is not eqivalent to the deliverator's start location.
- * @method getNewStartLocation
+ * @method getNewEndLocation
  * @param  {Object}            node The deliverator object for whom a new end
  *   location should be selected
  * @return {Object}                 The node object for the new end location
