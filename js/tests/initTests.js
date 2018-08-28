@@ -779,6 +779,22 @@ QUnit.test("animationTimer: when one deliverator is out of steps and is reset, o
 	assert.deepEqual(deliverator2.steps, []);
 });
 
+QUnit.test("animationTimer: when deliverator is reset with a set end point, that end point becomes the new start point", function(assert){
+    //arrange
+    addDeliverators(1);
+    const deliverator = deliverators[0];
+
+	deliverator.steps = [];
+	deliverator.end = 2;
+	
+	//act
+	// step to reset deliverator
+	animationTimer();
+	
+	//assert
+	assert.deepEqual(deliverator.start, 2);
+});
+
 
 QUnit.test("animationTimer: exactly one step is removed from the deliverator", function(assert){
     //arrange
