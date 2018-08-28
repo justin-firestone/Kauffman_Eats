@@ -501,6 +501,7 @@ QUnit.module("animationTimer", {
         ]);
         RESTAURANTS = "[3]";
         initNetwork();
+		DISTANCE_PER_TICK = 3;
     }
 });
 
@@ -529,3 +530,135 @@ QUnit.test("animationTimer: one deliverator following the path 1-2-3-2-4-5", fun
         animationTimer();
     }
 });
+
+QUnit.test("animationTimer: deliverators get new paths if their step count is zero", function(assert){
+    //arrange
+    addDeliverators(1);
+    const deliverator = deliverators[0];
+
+    //act/assert
+    assert.deepEqual(deliverator.steps.length, 0);
+	
+	//run animationTimer once to generate the path for the new deliverator
+    animationTimer();
+	
+    assert.notDeepEqual(deliverator.path.length, 0);
+});
+
+QUnit.test("animationTimer: deliverators get new steps if their step count is zero", function(assert){
+    //arrange
+    addDeliverators(1);
+    const deliverator = deliverators[0];
+
+    //act/assert
+    assert.deepEqual(deliverator.steps.length, 0);
+	
+	//run animationTimer once to generate the steps for the new deliverator
+    animationTimer();
+	
+    assert.notDeepEqual(deliverator.steps.length, 0);
+});
+
+QUnit.test("animationTimer: deliverators get correct new start location if they didn't have any steps", function(assert){
+    //arrange
+    addDeliverators(1);
+    const deliverator = deliverators[0];
+	const expectedStartId = 1;
+
+    //act/assert
+    assert.deepEqual(deliverator.steps.length, 0);
+	
+	//run animationTimer once to generate the start location for the new deliverator
+    animationTimer();
+	
+	assert.deepEqual(deliverator.start, expectedStartId);
+});
+
+QUnit.test("animationTimer: deliverators get correct new x if they didn't have any steps", function(assert){
+    //arrange
+    addDeliverators(1);
+    const deliverator = deliverators[0];
+	const expectedX = 0;
+
+    //act/assert
+    assert.deepEqual(deliverator.steps.length, 0);
+	
+	//run animationTimer once to generate the new x coordinate for the new deliverator
+    animationTimer();
+	
+	assert.deepEqual(deliverator.x, expectedX);
+});
+
+QUnit.test("animationTimer: deliverators get correct new y if they didn't have any steps", function(assert){
+    //arrange
+    addDeliverators(1);
+    const deliverator = deliverators[0];
+	const expectedY = 0;
+
+    //act/assert
+    assert.deepEqual(deliverator.steps.length, 0);
+	
+	//run animationTimer once to generate the new y coordinate for the new deliverator
+    animationTimer();
+	
+	assert.deepEqual(deliverator.y, expectedY);
+});
+
+QUnit.test("animationTimer: deliverators get correct new restaurant if they didn't have any steps", function(assert){
+    //arrange
+    addDeliverators(1);
+    const deliverator = deliverators[0];
+	// create multiple restaurants
+	RESTAURANTS = "[3,5,10]";
+	const expectedRestaurant = 5;
+
+    //act/assert
+    assert.deepEqual(deliverator.steps.length, 0);
+	
+	//run animationTimer once to generate the new restaurant for the new deliverator
+    animationTimer();
+	
+	assert.deepEqual(deliverator.restaurant, expectedRestaurant);
+});
+
+QUnit.test("animationTimer: deliverators get correct new end location if they didn't have any steps", function(assert){
+    //arrange
+    addDeliverators(1);
+    const deliverator = deliverators[0];
+	const expectedEndId = 5;
+
+    //act/assert
+    assert.deepEqual(deliverator.steps.length, 0);
+	
+	//run animationTimer once to generate the new end for the new deliverator
+    animationTimer();
+
+	assert.deepEqual(deliverator.end, expectedEndId);
+});
+
+QUnit.test("animationTimer: when one deliverator is out of steps and is reset, others should remain untouched", function(assert){
+    //arrange
+    addDeliverators(2);
+    const deliverator1 = deliverators[0];
+	const deliverator2 = deliverators[1];
+
+	deliverator1.steps = [{x: 0, y: 0}];
+	deliverator2.steps = [{x: 0, y: 0}, {x: 1, y: 0}];
+	
+	//act/assert
+	// step once to clear the last step for deliverator1
+	animationTimer();
+	
+	assert.deepEqual(deliverator1.steps.length, 0);
+	assert.deepEqual(deliverator2.steps.length, 1);
+	
+	// step once to reset deliverator1
+	animationTimer();
+	
+	// verify that deliverator1 was reset by checking that it got more steps
+	assert.notDeepEqual(deliverator1.steps.length, 0);
+	
+	// verify that deliverator2 was not reset by checking it did not get more steps
+	assert.deepEqual(deliverator2.steps, []);
+});
+
