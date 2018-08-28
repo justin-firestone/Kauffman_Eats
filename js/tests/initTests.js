@@ -304,29 +304,29 @@ QUnit.module("animationTimer", {
             "2": {  
                 "id":2,
                 "label":"J2",
-                "x": 1,
+                "x": 2,
                 "y": 0,
                 "group":"primary"
             },
             "3": {  
                 "id": 3,
                 "label": "J3",
-                "x": 2,
+                "x": 4,
                 "y": 0,
                 "group": "primary"
             },
             "4": {  
                 "id": 4,
                 "label": "J4",
-                "x": 2,
-                "y": 1,
+                "x": 4,
+                "y": 2,
                 "group": "primary"
             },
             "5": {  
                 "id": 5,
                 "label": "J5",
-                "x": 3,
-                "y": 1,
+                "x": 6,
+                "y": 2,
                 "group": "primary"
             },
             "10": {  
@@ -342,14 +342,14 @@ QUnit.module("animationTimer", {
                 "x": 20,
                 "y": 1,
                 "group": "primary"
-            },
+            }
         };
         graphEdges = { 
             "1_2": {  
             "id": "1_2",
             "from": 1,
             "to": 2,
-            "length": 1,
+            "length": 2,
             "waypointEdges":[  
                 "1_2"
             ],
@@ -359,7 +359,7 @@ QUnit.module("animationTimer", {
                 "id": "2_3",
                 "from": 2,
                 "to": 3,
-                "length": 1,
+                "length": 2,
                 "waypointEdges":[  
                 "2_3"
                 ],
@@ -369,7 +369,7 @@ QUnit.module("animationTimer", {
                 "id": "2_4",
                 "from": 2,
                 "to": 4,
-                "length": 1,
+                "length": 2,
                 "waypointEdges":[  
                 "2_4"
                 ],
@@ -379,7 +379,7 @@ QUnit.module("animationTimer", {
                 "id": "4_5",
                 "from": 4,
                 "to": 5,
-                "length": 1,
+                "length": 2,
                 "waypointEdges":[  
                 "4_5"
                 ],
@@ -389,7 +389,7 @@ QUnit.module("animationTimer", {
                 "id": "10_11",
                 "from": 10,
                 "to": 11,
-                "length": 1,
+                "length": 2,
                 "waypointEdges":[  
                 "10_11"
                 ],
@@ -407,29 +407,29 @@ QUnit.module("animationTimer", {
             {  
                 "id": 2,
                 "label": "J2",
-                "x": 1,
+                "x": 2,
                 "y": 0,
                 "group": "primary"
             },
             {  
                 "id": 3,
                 "label": "J3",
-                "x": 2,
+                "x": 4,
                 "y": 0,
                 "group": "primary"
             },
             {  
                 "id": 4,
                 "label": "J4",
-                "x": 2,
-                "y": 1,
+                "x": 4,
+                "y": 2,
                 "group": "primary"
             },
             {  
                 "id": 5,
                 "label": "J5",
-                "x": 3,
-                "y": 1,
+                "x": 6,
+                "y": 2,
                 "group": "primary"
             },
             {  
@@ -445,6 +445,20 @@ QUnit.module("animationTimer", {
                 "x": 20,
                 "y": 1,
                 "group": "primary"
+            },
+            {  
+                "id": "waypoint_1",
+                "label": "J12",
+                "x": 2,
+                "y": 0,
+                "group": "waypoint"
+            },
+            {  
+                "id": "waypoint_2",
+                "label": "J13",
+                "x": 3,
+                "y": 0,
+                "group": "waypoint"
             }
         ]);
         displayEdges = getDataSetForItems([
@@ -497,25 +511,128 @@ QUnit.module("animationTimer", {
                 "10_11"
                 ],
                 "graphEdge":"10_11"
+            },
+            {
+                "id": "2_3_waypoint_1",
+                "from": 2,
+                "to": "waypoint_1",
+                "graphEdge": "2_3"
+            },
+            {
+                "id": "2_3_waypoint_2",
+                "from": "waypoint_1",
+                "to": "waypoint_2",
+                "graphEdge": "2_3"
+            },
+            {
+                "id": "2_3_waypoint_3",
+                "from": "waypoint_2",
+                "to": 3,
+                "graphEdge": "2_3"
             }
         ]);
         RESTAURANTS = "[3]";
         initNetwork();
-		DISTANCE_PER_TICK = 3;
+        DISTANCE_PER_TICK = 3;
     }
 });
 
 QUnit.test("animationTimer: one deliverator following the path 1-2-3-2-4-5", function(assert){
     //arrange
     addDeliverators(1);
+    DISTANCE_PER_TICK = 1;
     const deliverator = deliverators[0];
     const expectedPath = [graphNodes[1], graphNodes[2], graphNodes[3], graphNodes[2], graphNodes[4], graphNodes[5]];
     const expectedSteps = [
+        {
+            "x": 1,
+            "y": 0
+          },
+          {
+            "x": 2,
+            "y": 0
+          },
+          {
+            "x": 2,
+            "y": 0
+          },
+          {
+            "x": 3,
+            "y": 0
+          },
+          {
+            "x": 4,
+            "y": 0
+          },
+          {
+            "x": 4,
+            "y": 0
+          },
+          {
+            "x": 3,
+            "y": 0
+          },
+          {
+            "x": 2,
+            "y": 0
+          },
+          {
+            "x": 2,
+            "y": 0
+          },
+          {
+            "x": 2.7071067811865475,
+            "y": 0.7071067811865475
+          },
+          {
+            "x": 3.414213562373095,
+            "y": 1.414213562373095
+          },
+          {
+            "x": 4.82842712474619,
+            "y": 2
+          },
+          {
+            "x": 5.82842712474619,
+            "y": 2
+          },
+          {
+            "x": 6,
+            "y": 2
+          }
+    ];
+
+    //act/assert
+    //run animationTimer once to generate the path/steps for the new deliverator
+    assert.deepEqual(deliverator.path.length, 0);
+    animationTimer();
+    assert.deepEqual(deliverator.path, expectedPath);
+
+    //verify that the deliverator is stepping to the expected coordinates
+    for(let i = 0; i < expectedSteps.length; i++){
+        assert.deepEqual(deliverator.steps, expectedSteps.slice(i));
+        animationTimer();
+    }
+});
+
+QUnit.test("animationTimer: one deliverator following the path 1-2-4-5", function(assert){
+    //arrange
+    addDeliverators(1);
+    DISTANCE_PER_TICK = 1;
+    const deliverator = deliverators[0];
+    deliverator.start = 5;
+    deliverator.end = 1;
+    RESTAURANTS = "[2]";
+    const expectedPath = [graphNodes[1], graphNodes[2], graphNodes[4], graphNodes[5]];
+    const expectedSteps = [
+        {x: 1, y: 0},
         {x: 2, y: 0},
         {x: 2, y: 0},
-        {x: 1.7071067811865475, y: 0.7071067811865475},
-        {x: 2.414213562373095, y: 1},
-        {x: 3, y: 1}
+        {x: 2.7071067811865475, y: 0.7071067811865475},
+        {x: 3.414213562373095, y: 1.414213562373095},
+        {x: 4.82842712474619, y: 2},
+        {x: 5.82842712474619, y: 2},
+        {x: 6, y: 2}
     ];
 
     //act/assert
@@ -660,5 +777,59 @@ QUnit.test("animationTimer: when one deliverator is out of steps and is reset, o
 	
 	// verify that deliverator2 was not reset by checking it did not get more steps
 	assert.deepEqual(deliverator2.steps, []);
+});
+
+
+QUnit.test("animationTimer: exactly one step is removed from the deliverator", function(assert){
+    //arrange
+    addDeliverators(1);
+    DISTANCE_PER_TICK = 1;
+    const deliverator = deliverators[0];
+    const originalStepsLength = 14;
+
+    //act/assert
+    animationTimer();
+    assert.deepEqual(deliverator.steps.length, originalStepsLength);
+    animationTimer();
+    assert.deepEqual(deliverator.steps.length, originalStepsLength - 1);
+});
+
+QUnit.test("animationTimer: if deliverators get a new path, that path is highlighted", function(assert){
+    //arrange
+    addDeliverators(1);
+    const deliverator = deliverators[0];
+    const color = "hsla(217.53495674219417, 100%, 50%, 1)";
+    const edges = [displayEdges._data["1_2"], displayEdges._data["2_3"], displayEdges._data["2_4"], displayEdges._data["4_5"]];
+    
+    //act
+    animationTimer();
+
+    //assert
+    for(let edge of edges){
+        assert.deepEqual(edge.shadow.color, color);
+    }
+});
+
+QUnit.test("animationTimer: deliverator has moved on the network", function(assert){
+    //arrange
+    addDeliverators(1);
+    const deliveratorId = "deliverator_0";
+    const start = {
+        x: 0,
+        y: 0
+    };
+    const end = {
+        x: 4,
+        y: 0
+    };
+    
+    //act/assert
+    animationTimer();
+    deliveratorPosition = network.getPositions(deliveratorId)[deliveratorId];
+    assert.deepEqual(deliveratorPosition, start);
+
+    animationTimer();
+    deliveratorPosition = network.getPositions(deliveratorId)[deliveratorId];
+    assert.deepEqual(deliveratorPosition, end);
 });
 
