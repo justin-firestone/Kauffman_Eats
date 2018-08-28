@@ -801,13 +801,26 @@ QUnit.test("animationTimer: exactly one step is removed from the deliverator", f
     addDeliverators(1);
     DISTANCE_PER_TICK = 1;
     const deliverator = deliverators[0];
-    const originalStepsLength = 14;
+    const steps = [
+        {x: 2, y: 0},
+        {x: 2, y: 0},
+        {x: 3, y: 0},
+        {x: 4, y: 0},
+        {x: 4, y: 0},
+        {x: 3, y: 0},
+        {x: 2, y: 0},
+        {x: 2, y: 0},
+        {x: 2.7071067811865475, y: 0.7071067811865475},
+        {x: 3.414213562373095, y: 1.414213562373095},
+        {x: 4.82842712474619, y: 2},
+        {x: 5.82842712474619, y: 2},
+        {x: 6, y: 2}
+    ];
+    deliverator.steps = steps;
 
     //act/assert
     animationTimer();
-    assert.deepEqual(deliverator.steps.length, originalStepsLength);
-    animationTimer();
-    assert.deepEqual(deliverator.steps.length, originalStepsLength - 1);
+    assert.deepEqual(deliverator.steps, steps);
 });
 
 QUnit.test("animationTimer: if deliverators get a new path, that path is highlighted", function(assert){
@@ -829,23 +842,18 @@ QUnit.test("animationTimer: if deliverators get a new path, that path is highlig
 QUnit.test("animationTimer: deliverator has moved on the network", function(assert){
     //arrange
     addDeliverators(1);
-    const deliveratorId = "deliverator_0";
-    const start = {
-        x: 0,
-        y: 0
-    };
-    const end = {
-        x: 4,
-        y: 0
-    };
+    const deliverator = deliverators[0];
+    const steps = [
+        {x: 0, y: 0},
+        {x: 4, y: 0}
+    ];
+    deliverator.steps = steps;
     
     //act/assert
-    animationTimer();
-    deliveratorPosition = network.getPositions(deliveratorId)[deliveratorId];
-    assert.deepEqual(deliveratorPosition, start);
-
-    animationTimer();
-    deliveratorPosition = network.getPositions(deliveratorId)[deliveratorId];
-    assert.deepEqual(deliveratorPosition, end);
+    for(let step of steps){
+        animationTimer();
+        let deliveratorPosition = network.getPositions(deliverator.id)[deliverator.id];
+        assert.deepEqual(deliveratorPosition, step);
+    }
 });
 
