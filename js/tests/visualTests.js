@@ -373,6 +373,28 @@ QUnit.test("getStepsAlongPath: steps for path 1-2-4-5", function( assert ) {
     }
 });
 
+QUnit.test("getStepsAlongPath: steps for path 1-2-3-2-4-5", function( assert ) {
+    //arrange
+    const path = [graphNodes[1], graphNodes[2], graphNodes[3], graphNodes[2], graphNodes[4], graphNodes[5]];
+    const expectedSteps = [
+        {x: 0, y: 0},
+        {x: 2, y: 0},
+        {x: 2, y: 0},
+        {x: 1.7071067811865475, y: 0.7071067811865475},
+        {x: 2.414213562373095, y: 1},
+        {x: 3, y: 1}
+    ];
+
+    //act
+    const steps = getStepsAlongPath(path);
+
+    //assert
+    assert.deepEqual(steps.length, expectedSteps.length);
+    for(let i = 0; i < expectedSteps.length; i++){
+        assert.deepEqual(steps[i], expectedSteps[i]);
+    }
+});
+
 QUnit.test("travelDistanceAlongLineSegment: travel distance from 1 to 2", function( assert ) {
     //arrange
     const start = graphNodes[1], end = graphNodes[2], distanceToTravel = 1;
