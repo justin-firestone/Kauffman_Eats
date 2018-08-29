@@ -81,7 +81,7 @@ QUnit.test("Test getEdgesBetweenNodes with multiple waypoints", function( assert
 	assert.deepEqual(result, displayEdgeData);
 });
 
-QUnit.test("Test getDistanceBetweenPoints ", function( assert ) {
+QUnit.test("Test getDistanceBetweenPoints diagonal line", function( assert ) {
   // arrange
   const point1 = { x: 0, y: 0 };
   const point2 = { x: 3, y: 4 };
@@ -93,7 +93,7 @@ QUnit.test("Test getDistanceBetweenPoints ", function( assert ) {
   assert.deepEqual(result, 5);
 });
 
-QUnit.test("Test getDistanceBetweenPoints ", function( assert ) {
+QUnit.test("Test getDistanceBetweenPoints straight line", function( assert ) {
   // arrange
   const point1 = { x: 1, y: 0 };
   const point2 = { x: 1, y: 3 };
