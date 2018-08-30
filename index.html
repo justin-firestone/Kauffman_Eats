@@ -19,7 +19,7 @@
 			color: #555555;
 		}
 
-		#mynetwork {
+		#network_container {
 			width: 75%;
 			height: 750px;
 			border: 1px solid lightgray;
@@ -57,7 +57,7 @@
 	<h1>Kauffman Campus Cuisine Deliverators</h1>
 	<p> Simulate the Kauffman Campus Cuisine Deliverators, to see if this is an idea worth pursuing...</p>
 	<div id="container">
-		<div id="mynetwork"></div>
+		<div id="network_container"></div>
 		<div id="sidebar">
 			<h2>Deliverators</h2>
 			<div id="deliverator_panels"></div>
@@ -66,7 +66,6 @@
 	<script type="text/javascript">
 		$(document).ready(function() {
 			setRandomSeed();
-			// buildMapOld();
 			loadMap();
 			initNetwork();
 			addDeliverators(3);

@@ -4,14 +4,14 @@
  */
 function initNetwork() {
     // get the container in the DOM that will display the network
-    var container = document.getElementById('mynetwork');
+    const container = document.getElementById('network_container');
     // specify the data that will be displayed
-    var data = {
+    const data = {
         nodes: displayNodes,
         edges: displayEdges
     };
     // specify the options that will control how the data is displayed
-    var options = getNetworkOptions();
+    const options = getNetworkOptions();
 
     // actually create the network (a global variable)
     network = new vis.Network(container, data, options);
@@ -25,7 +25,7 @@ function initNetwork() {
  *   Network, according to the vis.js Network documentation.
  */
 function getNetworkOptions() {
-    var options = {
+    const options = {
         autoResize: true,
         height: '100%',
         width: '100%',
@@ -78,7 +78,6 @@ function getNetworkOptions() {
             waypoint: {
                 shape: 'image',
                 image: 'images/transparent.png',
-                // color: 'purple',
                 size: 25,
                 borderWidth: 0,
             },
@@ -148,7 +147,7 @@ function addDeliverators(numDeliverators) {
  * @return {Object}                 The node object for the new start location.
  */
 function getNewStartLocation(node) {
-    var start;
+    let start;
     if (node.end != false) {
         start = graphNodes[node.end];
     } else {
@@ -167,7 +166,7 @@ function getNewStartLocation(node) {
  * @return {Object}                 The node object for the new end location
  */
 function getNewEndLocation(node) {
-    var end = getRandomGraphNode();
+    let end = getRandomGraphNode();
     while (node.start == end.id) {
         end = getRandomGraphNode();
     }
@@ -181,15 +180,15 @@ function getNewEndLocation(node) {
  * @param  {Object}      deliveratorNode The deliverator that needs to be reset
  */
 function resetDeliverator(deliveratorNode) {
-    var start = getNewStartLocation(deliveratorNode);
+    const start = getNewStartLocation(deliveratorNode);
     deliveratorNode.start = start.id;
     deliveratorNode.x = start.x;
     deliveratorNode.y = start.y;
 
-    var restaurant = getRandomRestaurantNode();
+    const restaurant = getRandomRestaurantNode();
     deliveratorNode.restaurant = restaurant.id;
 
-    var end = getNewEndLocation(deliveratorNode);
+    const end = getNewEndLocation(deliveratorNode);
     deliveratorNode.end = end.id;
 
     deliveratorNode.path = [];
@@ -225,8 +224,8 @@ function getRandomColor() {
  * @return {Object}           A node object from the collection of graph nodes
  */
 function getRandomGraphNode() {
-    var keys = Object.keys(graphNodes);
-    var randomNode = graphNodes[keys[getRandomInt(keys.length - 1)]];
+    const keys = Object.keys(graphNodes);
+    const randomNode = graphNodes[keys[getRandomInt(keys.length - 1)]];
     return randomNode;
 }
 
@@ -237,8 +236,8 @@ function getRandomGraphNode() {
  * @return {Object}           A node object from the list of restaurant nodes
  */
 function getRandomRestaurantNode() {
-    var restaurants = JSON.parse(RESTAURANTS);
-    var randomRestaurant = restaurants[getRandomInt(restaurants.length - 1)];
+    const restaurants = JSON.parse(RESTAURANTS);
+    const randomRestaurant = restaurants[getRandomInt(restaurants.length - 1)];
     return graphNodes[randomRestaurant];
 }
 
@@ -248,9 +247,7 @@ function getRandomRestaurantNode() {
  * @method startAnimationTimer
  */
 function startAnimationTimer() {
-    // var myVar = setTimeout(myTimer, 100);
-    var myVar = setInterval(animationTimer, 10);
-    var count = 0;
+    const timer = setInterval(animationTimer, 10);
 
     // the function to be called on each tick of the timer
     function animationTimer() {

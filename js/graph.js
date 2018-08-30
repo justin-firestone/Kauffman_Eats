@@ -8,8 +8,8 @@
  *   nodes
  */
 function getEdgeID(nodeID1, nodeID2) {
-    var first = Math.min(nodeID1, nodeID2);
-    var second = Math.max(nodeID1, nodeID2);
+    const first = Math.min(nodeID1, nodeID2);
+    const second = Math.max(nodeID1, nodeID2);
     return first + '_' + second;
 }
 
@@ -27,12 +27,12 @@ function getEdgeID(nodeID1, nodeID2) {
  *   nodes (including waypoints)
  */
 function getEdgesBetweenNodes(nodeID1, nodeID2) {
-    var graphEdge = graphEdges[getEdgeID(nodeID1, nodeID2)];
+    const graphEdge = graphEdges[getEdgeID(nodeID1, nodeID2)];
     if (!graphEdge) {
         return [];
     }
 
-    var allEdges = [];
+    const allEdges = [];
     for (let i = 0; i < graphEdge.waypointEdges.length; i++) {
         allEdges.push(displayEdges.get(graphEdge.waypointEdges[i]))
     }
@@ -50,9 +50,9 @@ function getEdgesBetweenNodes(nodeID1, nodeID2) {
  *   and point2
  */
 function getDistanceBetweenPoints(point1, point2) {
-    var a = point1.x - point2.x;
-    var b = point1.y - point2.y;
+    const a = point1.x - point2.x;
+    const b = point1.y - point2.y;
 
-    var c = Math.sqrt(a * a + b * b);
+    const c = Math.sqrt(a * a + b * b);
     return c;
 }
