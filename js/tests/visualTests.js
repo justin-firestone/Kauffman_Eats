@@ -286,11 +286,11 @@ QUnit.test("getOrderedPointsFromPath: points from path 1-2-3-2-4", function( ass
     //arrange
     const path = [graphNodes[1], graphNodes[2], graphNodes[3], graphNodes[2], graphNodes[4]];
     const expectedPoints = [
-        {"x": 0, "y" 0},
-        {"x": 1, "y" 0},
-        {"x": 2, "y" 0},
-        {"x": 1, "y" 0},
-        {"x": 2, "y" 1}
+        {"x": 0, "y": 0},
+        {"x": 1, "y": 0},
+        {"x": 2, "y": 0},
+        {"x": 1, "y": 0},
+        {"x": 2, "y": 1}
     ];
 
     //act
