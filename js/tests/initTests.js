@@ -53,15 +53,15 @@ QUnit.test("getNewStartLocation: Deliverator with already-set end location", fun
     //arrange
     const expectedStartId = 844923267;
     const node = {
-        id: 'test_deliverator',
-        label: 'T_D',
-        color: {
-            background: getRandomColor(),
+        "id": 'test_deliverator',
+        "label": 'T_D',
+        "color": {
+            "background": getRandomColor(),
         },
-        group: 'deliverator',
-        start: false,
-        restaurant: false,
-        end: expectedStartId
+        "group": 'deliverator',
+        "start": false,
+        "restaurant": false,
+        "end": expectedStartId
     };
 
     //act
@@ -74,15 +74,15 @@ QUnit.test("getNewStartLocation: Deliverator with already-set end location", fun
 QUnit.test("getNewStartLocation: Deliverator with no end location", function(assert){
     //arrange
     const node = {
-        id: 'test_deliverator',
-        label: 'T_D',
-        color: {
-            background: getRandomColor(),
+        "id": 'test_deliverator',
+        "label": 'T_D',
+        "color": {
+            "background": getRandomColor(),
         },
-        group: 'deliverator',
-        start: false,
-        restaurant: false,
-        end: false
+        "group": 'deliverator',
+        "start": false,
+        "restaurant": false,
+        "end": false
     };
 
     //act
@@ -96,15 +96,15 @@ QUnit.test("getNewEndLocation: Deliverator with already-set start location", fun
     //arrange
     const expectedEndId = 844923267;
     const node = {
-        id: 'test_deliverator',
-        label: 'T_D',
-        color: {
-            background: getRandomColor(),
+        "id": 'test_deliverator',
+        "label": 'T_D',
+        "color": {
+            "background": getRandomColor(),
         },
-        group: 'deliverator',
-        start: expectedEndId,
-        restaurant: false,
-        end: false
+        "group": 'deliverator',
+        "start": expectedEndId,
+        "restaurant": false,
+        "end": false
     };
 
     //act
@@ -117,15 +117,15 @@ QUnit.test("getNewEndLocation: Deliverator with already-set start location", fun
 QUnit.test("getNewEndLocation: Deliverator with no start location", function(assert){
     //arrange
     const node = {
-        id: 'test_deliverator',
-        label: 'T_D',
-        color: {
-            background: getRandomColor(),
+        "id": 'test_deliverator',
+        "label": 'T_D',
+        "color": {
+            "background": getRandomColor(),
         },
-        group: 'deliverator',
-        start: false,
-        restaurant: false,
-        end: false
+        "group": 'deliverator',
+        "start": false,
+        "restaurant": false,
+        "end": false
     };
 
     //act
@@ -140,15 +140,15 @@ QUnit.test("resetDeliverator: reset deliverator with existing start and end loca
     const startNodeId = 4719907357, endNodeId = 844923267;
     const startX = 476.30366971418425, startY = -348.97568806968593;
     const deliverator = {
-        id: 'test_deliverator',
-        label: 'T_D',
-        color: {
-            background: getRandomColor(),
+        "id": 'test_deliverator',
+        "label": 'T_D',
+        "color": {
+            "background": getRandomColor(),
         },
-        group: 'deliverator',
-        start: startNodeId,
-        restaurant: false,
-        end: endNodeId
+        "group": 'deliverator',
+        "start": startNodeId,
+        "restaurant": false,
+        "end": endNodeId
     };
 
     //act
@@ -170,15 +170,15 @@ QUnit.test("resetDeliverator: reset deliverator with a start but no end location
     const startX = 521.8036697129946, startY = -933.4256880713099;
     const restaurantId = 2568624543;
     const deliverator = {
-        id: 'test_deliverator',
-        label: 'T_D',
-        color: {
-            background: getRandomColor(),
+        "id": 'test_deliverator',
+        "label": 'T_D',
+        "color": {
+            "background": getRandomColor(),
         },
-        group: 'deliverator',
-        start: false,
-        restaurant: false,
-        end: 4719907357
+        "group": 'deliverator',
+        "start": false,
+        "restaurant": false,
+        "end": 4719907357
     };
 
     //act
@@ -201,15 +201,15 @@ QUnit.test("resetDeliverator: reset deliverator with no start and end locations"
     const startX = 235.50366971392123, startY = 324.12431193051816;
     const restaurantId = 2568599384;
     const deliverator = {
-        id: 'test_deliverator',
-        label: 'T_D',
-        color: {
-            background: getRandomColor(),
+        "id": 'test_deliverator',
+        "label": 'T_D',
+        "color": {
+            "background": getRandomColor(),
         },
-        group: 'deliverator',
-        start: false,
-        restaurant: false,
-        end: false
+        "group": 'deliverator',
+        "start": false,
+        "restaurant": false,
+        "end": false
     };
 
     //act
@@ -625,14 +625,14 @@ QUnit.test("animationTimer: one deliverator following the path 1-2-4-5", functio
     RESTAURANTS = "[2]";
     const expectedPath = [graphNodes[1], graphNodes[2], graphNodes[4], graphNodes[5]];
     const expectedSteps = [
-        {x: 1, y: 0},
-        {x: 2, y: 0},
-        {x: 2, y: 0},
-        {x: 2.7071067811865475, y: 0.7071067811865475},
-        {x: 3.414213562373095, y: 1.414213562373095},
-        {x: 4.82842712474619, y: 2},
-        {x: 5.82842712474619, y: 2},
-        {x: 6, y: 2}
+        {"x": 1, "y": 0},
+        {"x": 2, "y": 0},
+        {"x": 2, "y": 0},
+        {"x": 2.7071067811865475, "y": 0.7071067811865475},
+        {"x": 3.414213562373095, "y": 1.414213562373095},
+        {"x": 4.82842712474619, "y": 2},
+        {"x": 5.82842712474619, "y": 2},
+        {"x": 6, "y": 2}
     ];
 
     //act/assert
@@ -759,8 +759,8 @@ QUnit.test("animationTimer: when one deliverator is out of steps and is reset, o
     const deliverator1 = deliverators[0];
 	const deliverator2 = deliverators[1];
 
-	deliverator1.steps = [{x: 0, y: 0}];
-	deliverator2.steps = [{x: 0, y: 0}, {x: 1, y: 0}];
+	deliverator1.steps = [{"x": 0, "y": 0}];
+	deliverator2.steps = [{"x": 0, "y": 0}, {"x": 1, "y": 0}];
 	
 	//act/assert
 	// step once to clear the last step for deliverator1
@@ -802,19 +802,19 @@ QUnit.test("animationTimer: exactly one step is removed from the deliverator", f
     DISTANCE_PER_TICK = 1;
     const deliverator = deliverators[0];
     const steps = [
-        {x: 2, y: 0},
-        {x: 2, y: 0},
-        {x: 3, y: 0},
-        {x: 4, y: 0},
-        {x: 4, y: 0},
-        {x: 3, y: 0},
-        {x: 2, y: 0},
-        {x: 2, y: 0},
-        {x: 2.7071067811865475, y: 0.7071067811865475},
-        {x: 3.414213562373095, y: 1.414213562373095},
-        {x: 4.82842712474619, y: 2},
-        {x: 5.82842712474619, y: 2},
-        {x: 6, y: 2}
+        {"x": 2, "y": 0},
+        {"x": 2, "y": 0},
+        {"x": 3, "y": 0},
+        {"x": 4, "y": 0},
+        {"x": 4, "y": 0},
+        {"x": 3, "y": 0},
+        {"x": 2, "y": 0},
+        {"x": 2, "y": 0},
+        {"x": 2.7071067811865475, "y": 0.7071067811865475},
+        {"x": 3.414213562373095, "y": 1.414213562373095},
+        {"x": 4.82842712474619, "y": 2},
+        {"x": 5.82842712474619, "y": 2},
+        {"x": 6, "y": 2}
     ];
     deliverator.steps = steps;
 
@@ -844,8 +844,8 @@ QUnit.test("animationTimer: deliverator has moved on the network", function(asse
     addDeliverators(1);
     const deliverator = deliverators[0];
     const steps = [
-        {x: 0, y: 0},
-        {x: 4, y: 0}
+        {"x": 0, "y": 0},
+        {"x": 4, "y": 0}
     ];
     deliverator.steps = steps;
     

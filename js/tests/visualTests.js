@@ -269,8 +269,8 @@ QUnit.test("getOrderedPointsFromPath: points from path 1-2", function( assert ) 
     //arrange
     const path = [graphNodes[1], graphNodes[2]];
     const expectedPoints = [
-        {x: 0, y: 0},
-        {x: 1, y: 0}
+        {"x": 0, "y": 0},
+        {"x": 1, "y": 0}
     ];
 
     //act
@@ -286,11 +286,11 @@ QUnit.test("getOrderedPointsFromPath: points from path 1-2-3-2-4", function( ass
     //arrange
     const path = [graphNodes[1], graphNodes[2], graphNodes[3], graphNodes[2], graphNodes[4]];
     const expectedPoints = [
-        {x: 0, y: 0},
-        {x: 1, y: 0},
-        {x: 2, y: 0},
-        {x: 1, y: 0},
-        {x: 2, y: 1}
+        {"x": 0, "y": 0},
+        {"x": 1, "y": 0},
+        {"x": 2, "y": 0},
+        {"x": 1, "y": 0},
+        {"x": 2, "y": 1}
     ];
 
     //act
@@ -336,11 +336,11 @@ QUnit.test("getStepsAlongPath: steps for path 1-2", function( assert ) {
     //arrange
     const path = [graphNodes[10], graphNodes[11]];
     const expectedSteps = [
-        {x: 10, y: 1},
-        {x: 13, y: 1},
-        {x: 16, y: 1},
-        {x: 19, y: 1},
-        {x: 20, y: 1}
+        {"x": 10, "y": 1},
+        {"x": 13, "y": 1},
+        {"x": 16, "y": 1},
+        {"x": 19, "y": 1},
+        {"x": 20, "y": 1}
     ];
 
     //act
@@ -357,10 +357,10 @@ QUnit.test("getStepsAlongPath: steps for path 1-2-4-5", function( assert ) {
     //arrange
     const path = [graphNodes[1], graphNodes[2], graphNodes[4], graphNodes[5]];
     const expectedSteps = [
-        {x: 0, y: 0},
-        {x: 1.7071067811865475, y: 0.7071067811865475},
-        {x: 2.414213562373095, y: 1},
-        {x: 3, y: 1}
+        {"x": 0, "y": 0},
+        {"x": 1.7071067811865475, "y": 0.7071067811865475},
+        {"x": 2.414213562373095, "y": 1},
+        {"x": 3, "y": 1}
     ];
 
     //act
@@ -377,12 +377,12 @@ QUnit.test("getStepsAlongPath: steps for path 1-2-3-2-4-5", function( assert ) {
     //arrange
     const path = [graphNodes[1], graphNodes[2], graphNodes[3], graphNodes[2], graphNodes[4], graphNodes[5]];
     const expectedSteps = [
-        {x: 0, y: 0},
-        {x: 2, y: 0},
-        {x: 2, y: 0},
-        {x: 1.7071067811865475, y: 0.7071067811865475},
-        {x: 2.414213562373095, y: 1},
-        {x: 3, y: 1}
+        {"x": 0, "y": 0},
+        {"x": 2, "y": 0},
+        {"x": 2, "y": 0},
+        {"x": 1.7071067811865475, "y": 0.7071067811865475},
+        {"x": 2.414213562373095, "y": 1},
+        {"x": 3, "y": 1}
     ];
 
     //act
@@ -399,8 +399,8 @@ QUnit.test("travelDistanceAlongLineSegment: travel distance from 1 to 2", functi
     //arrange
     const start = graphNodes[1], end = graphNodes[2], distanceToTravel = 1;
     const expectedStep = {
-        x: 1,
-        y: 0
+        "x": 1,
+        "y": 0
     }
 
     //act
@@ -415,8 +415,8 @@ QUnit.test("travelDistanceAlongLineSegment: travel distance from 1 to 5", functi
     //arrange
     const start = graphNodes[1], end = graphNodes[5], distanceToTravel = 3;
     const expectedStep = {
-        x: 2.846049894151541,
-        y: 0.9486832980505138
+        "x": 2.846049894151541,
+        "y": 0.9486832980505138
     }
 
     //act
