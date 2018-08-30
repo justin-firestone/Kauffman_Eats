@@ -175,7 +175,7 @@ function getStepsAlongPath(path) {
         // while there's still distance on the segment to travel,
         while (segmentDistanceRemaining - stepDistanceRemaining >= 0) {
             // travel that distance
-            let step = travelDistanceAlongLineSegment(previousStep, lineSegmentPoints[i + 1], stepDistanceRemaining);
+            const step = travelDistanceAlongLineSegment(previousStep, lineSegmentPoints[i + 1], stepDistanceRemaining);
             // add the point to steps
             steps.push(step);
             // reset previousStep to be this step
