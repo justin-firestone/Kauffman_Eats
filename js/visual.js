@@ -11,7 +11,7 @@ var highlightedEdges = [];
  *   animation.
  * @type {number}
  */
-const DISTANCE_PER_TICK = 3;
+var DISTANCE_PER_TICK = 3;
 
 
 /**

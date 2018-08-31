@@ -99,8 +99,8 @@ function getNetworkOptions() {
  *    simulator.
  * @method setRandomSeed
  */
-function setRandomSeed() {
-    Math.seedrandom('Raikes');
+function setRandomSeed(seed) {
+    Math.seedrandom(seed);
 }
 
 
@@ -158,9 +158,9 @@ function getNewStartLocation(node) {
 
 
 /**
- * Gets a start location for a deliverator. It will be a new random location that
+ * Gets a end location for a deliverator. It will be a new random location that
  *   is not eqivalent to the deliverator's start location.
- * @method getNewStartLocation
+ * @method getNewEndLocation
  * @param  {Object}            node The deliverator object for whom a new end
  *   location should be selected
  * @return {Object}                 The node object for the new end location
@@ -248,29 +248,29 @@ function getRandomRestaurantNode() {
  */
 function startAnimationTimer() {
     const timer = setInterval(animationTimer, 10);
+}
 
-    // the function to be called on each tick of the timer
-    function animationTimer() {
-        for (let t = 0; t < deliverators.length; t++) {
-            // if the deliverator has completed all of its steps, find a new location
-            if (deliverators[t].steps.length == 0) {
-                // find new destination for the deliverator
-                resetDeliverator(deliverators[t]);
+// the function to be called on each tick of the timer
+function animationTimer() {
+    for (let t = 0; t < deliverators.length; t++) {
+        // if the deliverator has completed all of its steps, find a new location
+        if (deliverators[t].steps.length == 0) {
+            // find new destination for the deliverator
+            resetDeliverator(deliverators[t]);
 
-                // find a path for the deliverator
-                deliverators[t].path = findPathThroughRestaurant(deliverators[t].start, deliverators[t].restaurant, deliverators[t].end)
+            // find a path for the deliverator
+            deliverators[t].path = findPathThroughRestaurant(deliverators[t].start, deliverators[t].restaurant, deliverators[t].end)
 
-                // highlight the path
-                highlightAllPaths();
+            // highlight the path
+            highlightAllPaths();
 
-                // find incremental steps for the path
-                deliverators[t].steps = getStepsAlongPath(deliverators[t].path);
+            // find incremental steps for the path
+            deliverators[t].steps = getStepsAlongPath(deliverators[t].path);
 
-                updateDeliveratorInfoPanels();
-            }
-            // pop a step off the stack, and travel that step
-            let step = deliverators[t].steps.shift();
-            network.moveNode(deliverators[t].id, step.x, step.y);
+            updateDeliveratorInfoPanels();
         }
+        // pop a step off the stack, and travel that step
+        let step = deliverators[t].steps.shift();
+        network.moveNode(deliverators[t].id, step.x, step.y);
     }
 }
