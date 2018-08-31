@@ -2,7 +2,7 @@
  * Determines which JSON map will be loaded.
  * @type {String}
  */
-var MAP_DATA = MAP_DATA_SMALL;
+const MAP_DATA = MAP_DATA_SMALL;
 
 /**
  * Loads the data to instantiate the map.
@@ -10,7 +10,7 @@ var MAP_DATA = MAP_DATA_SMALL;
  */
 function loadMap() {
     // get the map data
-    var mapData = JSON.parse(MAP_DATA);
+    const mapData = JSON.parse(MAP_DATA);
 
     // set global variables graphNodes and graphEdges
     graphNodes = mapData.graphNodes;
@@ -30,7 +30,7 @@ function loadMap() {
  * @return {DataSet}               a DataSet containing all the things in items
  */
 function getDataSetForItems(items) {
-    var ds = new vis.DataSet();
+    const ds = new vis.DataSet();
     for (let i = 0; i < items.length; i++) {
         ds.add(items[i]);
     }
