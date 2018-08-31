@@ -1,11 +1,11 @@
 function findPathThroughRestaurant(sourceID, restaurantID, destinationID) {
-    var sourceToRestaurantPath = findPath(sourceID, restaurantID);
-    var restaurantToDestinationPath = findPath(restaurantID, destinationID);
+    const sourceToRestaurantPath = findPath(sourceID, restaurantID);
+    const restaurantToDestinationPath = findPath(restaurantID, destinationID);
 
     // if the restaurant can't show up twice in the path, so delete it from one of the lists.
     sourceToRestaurantPath.pop();
 
-    var totalPath = sourceToRestaurantPath.concat(restaurantToDestinationPath);
+    const totalPath = sourceToRestaurantPath.concat(restaurantToDestinationPath);
 
     return totalPath;
 }
@@ -20,8 +20,8 @@ function findPathThroughRestaurant(sourceID, restaurantID, destinationID) {
  *   them.
  */
 function findPath(sourceID, destinationID) {
-    var sourceNode = false;
-    var destinationNode = false;
+    let sourceNode = false;
+    let destinationNode = false;
 
     // set all nodes to unvisited and find source/destination nodes
     for (let id in graphNodes) {
@@ -35,7 +35,7 @@ function findPath(sourceID, destinationID) {
     }
 
     // get the path & return it
-    var path = dfs(sourceNode, destinationNode);
+    const path = dfs(sourceNode, destinationNode);
     return path;
 }
 
@@ -50,7 +50,7 @@ function findPath(sourceID, destinationID) {
  */
 function getNeighborsForNode(nodeId) {
     // loop through all edges in graphEdges
-    var neighbors = [];
+    const neighbors = [];
 
     // loop through the edges and find neighbors
     for (let edgeID in graphEdges) {
@@ -65,7 +65,7 @@ function getNeighborsForNode(nodeId) {
     }
 
     // make sure neighbors aren't duplicated
-    var uniqueNeighbors = Array.from(new Set(neighbors));
+    const uniqueNeighbors = Array.from(new Set(neighbors));
 
     return uniqueNeighbors;
 }
@@ -83,9 +83,9 @@ function getNeighborsForNode(nodeId) {
  *   the found path
  */
 function dfs(source, destination) {
-    var path = []
+    const path = []
 
-    var numRecurses = 0;
+    let numRecurses = 0;
     recursiveDFS(source, destination);
 
     function recursiveDFS(source, destination) {
@@ -106,7 +106,7 @@ function dfs(source, destination) {
         }
 
         // get neighbors
-        var neighbors = getNeighborsForNode(source.id);
+        const neighbors = getNeighborsForNode(source.id);
 
         // set termination variable
         var pathFound = false;

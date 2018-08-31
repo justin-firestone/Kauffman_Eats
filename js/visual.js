@@ -22,15 +22,15 @@ var DISTANCE_PER_TICK = 3;
  */
 function highlightPath(path, color) {
     // for each node in the path
-    for (i = 1; i < path.length; i++) {
-        var start = path[i - 1],
-            end = path[i];
+    for (let i = 1; i < path.length; i++) {
+        const start = path[i - 1],
+			end = path[i];
 
         // find the edge(s) associated with those nodes
-        var edgesBetween = getEdgesBetweenNodes(start.id, end.id);
+        const edgesBetween = getEdgesBetweenNodes(start.id, end.id);
 
         // add shadow to those edges
-        for (var e = 0; e < edgesBetween.length; e++) {
+        for (let e = 0; e < edgesBetween.length; e++) {
             highlightedEdges.push(edgesBetween[e].id);
             displayEdges.update({
                 id: edgesBetween[e].id,
@@ -84,11 +84,11 @@ function getOrderedPointsFromPath(path) {
     // want to return a list of points.
     // assume a line segment exists between each pair of points
 
-    var orderedLineSegments = [];
+    const orderedLineSegments = [];
 
     // for each node in the path
     for (let i = 1; i < path.length; i++) {
-        let start = path[i - 1],
+        const start = path[i - 1],
             end = path[i];
 
         // find the edge(s) associated with those nodes node
@@ -99,7 +99,7 @@ function getOrderedPointsFromPath(path) {
         }
 
         for (let e = 0; e < edgesBetween.length; e++) {
-            let fromNode = displayNodes.get(edgesBetween[e].from);
+            const fromNode = displayNodes.get(edgesBetween[e].from);
             orderedLineSegments.push({
                 x: fromNode.x,
                 y: fromNode.y
@@ -128,11 +128,11 @@ function getOrderedPointsFromPath(path) {
  *   points
  */
 function invertEdgesBetween(edgesBetween) {
-    var inverted = [];
+    let inverted = [];
 
     // invert the edges
     for (let i = 0; i < edgesBetween.length; i++) {
-        let edgeCopy = {
+        const edgeCopy = {
             from: edgesBetween[i].to,
             to: edgesBetween[i].from,
         }
@@ -157,14 +157,14 @@ function invertEdgesBetween(edgesBetween) {
  *   (including x and y coords)
  */
 function getStepsAlongPath(path) {
-    var lineSegmentPoints = getOrderedPointsFromPath(path),
+    const lineSegmentPoints = getOrderedPointsFromPath(path),
         steps = [];
 
     // add the first point as a step
     steps.push(lineSegmentPoints[0]);
 
     // variable that contains the amount remaining when a partial step was executed.
-    var stepDistanceRemaining = DISTANCE_PER_TICK;
+    let stepDistanceRemaining = DISTANCE_PER_TICK;
 
     // start looping through all the line segments
     for (let i = 0; i < lineSegmentPoints.length - 1; i++) {
@@ -175,7 +175,7 @@ function getStepsAlongPath(path) {
         // while there's still distance on the segment to travel,
         while (segmentDistanceRemaining - stepDistanceRemaining >= 0) {
             // travel that distance
-            let step = travelDistanceAlongLineSegment(previousStep, lineSegmentPoints[i + 1], stepDistanceRemaining);
+            const step = travelDistanceAlongLineSegment(previousStep, lineSegmentPoints[i + 1], stepDistanceRemaining);
             // add the point to steps
             steps.push(step);
             // reset previousStep to be this step
@@ -215,13 +215,13 @@ function getStepsAlongPath(path) {
  */
 function travelDistanceAlongLineSegment(point1, point2, distanceToTravel) {
     // get distance between two points
-    var totalDistance = getDistanceBetweenPoints(point1, point2);
+    const totalDistance = getDistanceBetweenPoints(point1, point2);
 
     // get ratio of the distance we want to travel to the point length
-    var distanceRatio = distanceToTravel / totalDistance;
+    const distanceRatio = distanceToTravel / totalDistance;
 
     //(xt,yt)=(((1−t)x0+t*x1),((1−t)y0+t*y1))
-    var step = {
+    const step = {
         x: ((1 - distanceRatio) * point1.x) + (distanceRatio * point2.x),
         y: ((1 - distanceRatio) * point1.y) + (distanceRatio * point2.y),
     };
@@ -233,32 +233,32 @@ function createDeliveratorInfoPanels() {
     // for each deliverator
     for (let i = 0; i < deliverators.length; i++) {
         // make a new panel
-        let newPanel = $('<div class="deliverator_master_panel" id="deliverator_' + i + '_panel"></div>');
+        const newPanel = $('<div class="deliverator_master_panel" id="deliverator_' + i + '_panel"></div>');
 
         // add a title
-        let title = $('<div class="deliverator_title">Deliverator ' + i + '</div>');
+        const title = $('<div class="deliverator_title">Deliverator ' + i + '</div>');
         title.css('color', deliverators[i].color.background);
         newPanel.append(title);
 
         // add a div to hold the data about the panel
-        let infoDiv = $('<div class="deliverator_info"></div>');
+        const infoDiv = $('<div class="deliverator_info"></div>');
         newPanel.append(infoDiv);
 
         // add the start
-        let startNodeLabel = graphNodes[deliverators[i].start].label;
-        let start = $('<span class="start">' + startNodeLabel + '</span>');
+        const startNodeLabel = graphNodes[deliverators[i].start].label;
+        const start = $('<span class="start">' + startNodeLabel + '</span>');
         infoDiv.append(start);
         infoDiv.append("&rarr;");
 
         // add the restaurant
-        let restaurantNodeLabel = graphNodes[deliverators[i].restaurant].label;
-        let restaurant = $('<span class="restaurant">' + restaurantNodeLabel + '</span>');
+        const restaurantNodeLabel = graphNodes[deliverators[i].restaurant].label;
+        const restaurant = $('<span class="restaurant">' + restaurantNodeLabel + '</span>');
         infoDiv.append(restaurant);
         infoDiv.append("&rarr;");
 
         // add the start
-        let endNodeLabel = graphNodes[deliverators[i].end].label;
-        let end = $('<span class="end">' + endNodeLabel + '</span>');
+        const endNodeLabel = graphNodes[deliverators[i].end].label;
+        const end = $('<span class="end">' + endNodeLabel + '</span>');
         infoDiv.append(end);
 
         $('#deliverator_panels').append(newPanel);
@@ -273,13 +273,13 @@ function createDeliveratorInfoPanels() {
  */
 function updateDeliveratorInfoPanels() {
     for (let i = 0; i < deliverators.length; i++) {
-        let startNodeLabel = graphNodes[deliverators[i].start].label;
+        const startNodeLabel = graphNodes[deliverators[i].start].label;
         $('#deliverator_' + i + '_panel .start').html(startNodeLabel);
 
-        let restaurantNodeLabel = graphNodes[deliverators[i].restaurant].label;
+        const restaurantNodeLabel = graphNodes[deliverators[i].restaurant].label;
         $('#deliverator_' + i + '_panel .restaurant').html(restaurantNodeLabel);
 
-        let endNodeLabel = graphNodes[deliverators[i].end].label;
+        const endNodeLabel = graphNodes[deliverators[i].end].label;
         $('#deliverator_' + i + '_panel .end').html(endNodeLabel);
     }
 }

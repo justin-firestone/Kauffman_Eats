@@ -7,7 +7,7 @@ QUnit.module("initTests", {
 
 QUnit.test("initNetwork: Network Creation", function( assert ) {
     //arrange
-    const expectedContainer = document.getElementById('mynetwork');
+    const expectedContainer = document.getElementById('network_container');
     const expectedNodeIds = Object.keys(displayNodes._data);
     const expectedEdgeIds = Object.keys(displayEdges._data);
 
