@@ -22,6 +22,7 @@ var DISTANCE_PER_TICK = 3;
  */
 function highlightPath(path, color) {
     // for each node in the path
+    let updates = [];
     for (let i = 1; i < path.length; i++) {
         const start = path[i - 1],
 			end = path[i];
@@ -31,16 +32,18 @@ function highlightPath(path, color) {
 
         // add shadow to those edges
         for (let e = 0; e < edgesBetween.length; e++) {
-            highlightedEdges.push(edgesBetween[e].id);
-            displayEdges.update({
-                id: edgesBetween[e].id,
+            let id = edgesBetween[e].id;
+            highlightedEdges[id] = true;
+            updates.push({
+                id: id,
                 shadow: {
                     enabled: true,
-                    color: color,
+                    color: color
                 }
             });
         }
     }
+    displayEdges.update(updates);
 }
 
 
@@ -50,18 +53,21 @@ function highlightPath(path, color) {
  */
 function highlightAllPaths() {
     // remove highlight from all edges
-    for (let i = 0; i < highlightedEdges.length; i++) {
-        displayEdges.update({
-            id: highlightedEdges[i],
-            shadow: {
-                enabled: false,
-                color: '#000000',
+    {
+        let ids = Object.keys(highlightedEdges);
+        let updates = Array(ids.length);
+        for (let i = 0; i < ids.length; i++) {
+            updates[i] = {
+                id: ids[i],
+                shadow: {
+                    enabled: false
+                }
             }
-        });
+        }
+        displayEdges.update(updates);
     }
-
     // reset the global variable that contains highlighted edges
-    highlightedEdges = [];
+    highlightedEdges = {};
 
     // for each deliverator
     for (let i = 0; i < deliverators.length; i++) {
@@ -69,6 +75,7 @@ function highlightAllPaths() {
         highlightPath(deliverators[i].path, deliverators[i].color.background);
     }
 }
+
 
 
 /**
@@ -228,7 +235,10 @@ function travelDistanceAlongLineSegment(point1, point2, distanceToTravel) {
     return step;
 }
 
-
+/**
+ * Creates the panels that display metadata about the deliverators.
+ * @method createDeliveratorInfoPanels
+ */
 function createDeliveratorInfoPanels() {
     // for each deliverator
     for (let i = 0; i < deliverators.length; i++) {
@@ -267,9 +277,8 @@ function createDeliveratorInfoPanels() {
 
 
 /**
- * Updates the deliverator info panels
+ * Updates the deliverator info panels with the most up-to-date information.
  * @method updateDeliveratorInfoPanels
- * @return {[type]}                    [description]
  */
 function updateDeliveratorInfoPanels() {
     for (let i = 0; i < deliverators.length; i++) {
